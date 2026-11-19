@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "Creative Journal",
-    "slug": "creative-journal",
-    "scheme": "creative-journal",
+    "name": "Folio",
+    "slug": "folio",
+    "scheme": "folio",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -20,7 +20,9 @@
     },
     "plugins": [
       "expo-router",
-      "expo-status-bar"
+      "expo-status-bar",
+      "expo-font",
+      "@react-native-vector-icons/lucide"
     ]
   }
 }
