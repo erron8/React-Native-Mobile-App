@@ -1,4 +1,5 @@
 import { Tabs } from 'expo-router';
+import { Lucide } from '@react-native-vector-icons/lucide';
 
 const TabLayout = () => {
   return (
@@ -9,11 +10,57 @@ const TabLayout = () => {
         tabBarInactiveTintColor: '#696466',
       }}
     >
-      <Tabs.Screen name="index" options={{ title: 'Home' }} />
-      <Tabs.Screen name="search" options={{ title: 'Search' }} />
-      <Tabs.Screen name="add" options={{ title: 'Add' }} />
-      <Tabs.Screen name="notifications" options={{ title: 'Notifications' }} />
-      <Tabs.Screen name="profile" options={{ title: 'Profile' }} />
+      {/* Bottom Tabs */}
+      <Tabs.Screen
+        name="index"
+        options={{
+          title: 'Home',
+          tabBarIcon: ({ color }) => (
+            <Lucide name="house" size={20} color={color} />
+          ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="search"
+        options={{
+          title: 'Search',
+          tabBarIcon: ({ color }) => (
+            <Lucide name="search" size={20} color={color} />
+          ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="add"
+        options={{
+          title: 'Add',
+          tabBarIcon: ({ color }) => (
+            <Lucide name="plus" size={20} color={color} />
+          ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="notifications"
+        options={{
+          title: 'Notifications',
+          tabBarIcon: ({ color }) => (
+            <Lucide name="bell" size={20} color={color} />
+          ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: 'Profile',
+          tabBarIcon: ({ color }) => (
+            <Lucide name="user-round" size={20} color={color} />
+          ),
+        }}
+      />
+      {/* End Bottom Tabs */}
     </Tabs>
   );
 };
