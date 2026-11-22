@@ -1,31 +1,50 @@
 import { Image, StyleSheet, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Lucide } from '@react-native-vector-icons/lucide';
+import { DMSans_700Bold } from '@expo-google-fonts/dm-sans/700Bold';
+import { DMSerifDisplay_400Regular } from '@expo-google-fonts/dm-serif-display/400Regular';
+import { useFonts } from 'expo-font';
 
-import pins from '../../data/pins';
+const previewPins = [
+  {
+    title: 'Midnight Drive',
+    image: require('../../../assets/search/midnight-drive.jpg'),
+  },
+  {
+    title: 'City From Above',
+    image: require('../../../assets/search/city-from-above.jpg'),
+  },
+];
 
-const topicImage = { uri: 'https://placehold.co/600x400.png?text=+' };
-const previewPins = pins.slice(0, 2);
-
-const TopicCard = ({ title }) => {
+const TopicCard = ({ title, image, textStyle }) => {
   return (
     <View style={styles.topicCard}>
       {/* Topic Image */}
-      <Image source={topicImage} style={styles.image} resizeMode="cover" />
+      <Image source={image} style={styles.image} resizeMode="cover" />
+      <View style={[styles.image, styles.topicShade]} />
       {/* End Topic Image */}
 
       {/* Topic Title */}
-      <Text style={styles.topicTitle}>{title}</Text>
+      <Text style={[styles.topicTitle, textStyle]}>{title}</Text>
       {/* End Topic Title */}
     </View>
   );
 };
 
 const Search = () => {
+  const [fontsLoaded] = useFonts({
+    DMSerifDisplay_400Regular,
+    DMSans_700Bold,
+  });
+
+  const boldFont = fontsLoaded && styles.boldFont;
+
   return (
     <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
       {/* Title Container */}
-      <Text style={styles.title}>Search</Text>
+      <Text style={[styles.title, fontsLoaded && styles.titleFont]}>
+        Search
+      </Text>
       {/* End Title Container */}
 
       {/* Search Container */}
@@ -35,7 +54,7 @@ const Search = () => {
           accessibilityLabel="Search"
           placeholder="Search..."
           placeholderTextColor="#696466"
-          style={styles.searchInput}
+          style={[styles.searchInput, boldFont]}
           underlineColorAndroid="transparent"
         />
       </View>
@@ -43,26 +62,38 @@ const Search = () => {
 
       {/* Browse Topics Container */}
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Browse topics</Text>
+        <Text style={[styles.sectionTitle, boldFont]}>Browse topics</Text>
 
         <View style={styles.wideTopic}>
-          <TopicCard title="Photography" />
+          <TopicCard
+            title="Night Photography"
+            image={require('../../../assets/search/night-photography.jpg')}
+            textStyle={boldFont}
+          />
         </View>
 
         <View style={styles.smallTopics}>
-          <TopicCard title="Objects" />
-          <TopicCard title="Style" />
+          <TopicCard
+            title="Studio Objects"
+            image={require('../../../assets/search/studio-objects.jpg')}
+            textStyle={boldFont}
+          />
+          <TopicCard
+            title="Everyday Style"
+            image={require('../../../assets/search/everyday-style.jpg')}
+            textStyle={boldFont}
+          />
         </View>
       </View>
       {/* End Browse Topics Container */}
 
       {/* Pins to Explore Container */}
       <View style={styles.pinsSection}>
-        <Text style={styles.sectionTitle}>Pins to explore</Text>
+        <Text style={[styles.sectionTitle, boldFont]}>Pins to explore</Text>
 
         <View style={styles.pinRow}>
           {previewPins.map((pin) => (
-            <View key={pin.id} style={styles.pinCard}>
+            <View key={pin.title} style={styles.pinCard}>
               {/* Pin Image */}
               <View style={styles.pinPhoto}>
                 <Image
@@ -74,7 +105,7 @@ const Search = () => {
               {/* End Pin Image */}
 
               {/* Pin Title */}
-              <Text style={styles.pinTitle}>{pin.title}</Text>
+              <Text style={[styles.pinTitle, boldFont]}>{pin.title}</Text>
               {/* End Pin Title */}
             </View>
           ))}
@@ -95,8 +126,13 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 40,
-    fontWeight: 'bold',
     color: '#241F20',
+  },
+  titleFont: {
+    fontFamily: 'DMSerifDisplay_400Regular',
+  },
+  boldFont: {
+    fontFamily: 'DMSans_700Bold',
   },
   searchField: {
     flexDirection: 'row',
@@ -118,7 +154,6 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: 20,
-    fontWeight: 'bold',
     color: '#241F20',
   },
   wideTopic: {
@@ -132,15 +167,18 @@ const styles = StyleSheet.create({
   topicCard: {
     flex: 1,
     justifyContent: 'flex-end',
-    padding: 10,
     borderRadius: 10,
     overflow: 'hidden',
     backgroundColor: '#EEEEEE',
   },
   topicTitle: {
+    marginHorizontal: 10,
+    marginBottom: 10,
     fontSize: 15,
-    fontWeight: 'bold',
-    color: '#241F20',
+    color: '#FFFFFF',
+  },
+  topicShade: {
+    backgroundColor: 'rgba(0, 0, 0, 0.55)',
   },
   image: {
     position: 'absolute',
@@ -170,7 +208,6 @@ const styles = StyleSheet.create({
   },
   pinTitle: {
     fontSize: 15,
-    fontWeight: 'bold',
     color: '#241F20',
   },
 });
