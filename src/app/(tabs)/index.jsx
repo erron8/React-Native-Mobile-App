@@ -7,9 +7,9 @@ import { DMSerifDisplay_400Regular } from '@expo-google-fonts/dm-serif-display/4
 import { Lucide } from '@react-native-vector-icons/lucide';
 import { useFonts } from 'expo-font';
 
-import pins from '../../data/pins';
+import pins from '../../data/homePins';
 
-const categories = ['For you', 'category1', 'category2'];
+const categories = ['For you', 'Art & form', 'Photography'];
 
 const Home = () => {
   const [selectedCategory, setSelectedCategory] = useState('For you');
@@ -39,10 +39,10 @@ const Home = () => {
             accessibilityRole="header"
             style={[styles.title, fontsLoaded && styles.titleFont]}
           >
-            User Name
+            Lebron James
           </Text>
           <Text style={[styles.subtitle, fontsLoaded && styles.mediumFont]}>
-            Proffesion
+            Goat
           </Text>
         </View>
       </View>
