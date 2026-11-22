@@ -1,18 +1,161 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Lucide } from '@react-native-vector-icons/lucide';
+
+const coverImage = { uri: 'https://placehold.co/700x250.png' };
+const boardImage = { uri: 'https://placehold.co/200x200.png' };
+
+const boards = [
+  { title: 'Board 1', pinCount: 10 },
+  { title: 'Board 2', pinCount: 15 },
+  { title: 'Board 3', pinCount: 20 },
+  { title: 'Board 4', pinCount: 25 },
+];
+
+const boardRows = [boards.slice(0, 2), boards.slice(2, 4)];
+
+const BoardCard = ({ board }) => {
+  return (
+    <View style={styles.boardCard}>
+      {/* Board Cover Container */}
+      <View style={styles.boardCover}>
+        <Image source={boardImage} style={styles.boardImage} resizeMode="cover" />
+        <Image source={boardImage} style={styles.boardImage} resizeMode="cover" />
+      </View>
+      {/* End Board Cover Container */}
+
+      {/* Board Info Container */}
+      <Text style={styles.boardTitle}>{board.title}</Text>
+      <Text style={styles.secondaryText}>{board.pinCount} pins</Text>
+      {/* End Board Info Container */}
+    </View>
+  );
+};
 
 const Profile = () => {
   return (
-    <View style={styles.container}>
-      <Text>Profile</Text>
-    </View>
+    <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
+      {/* Cover Container */}
+      <View>
+        <Image source={coverImage} style={styles.cover} resizeMode="cover" />
+
+        <View style={styles.avatar}>
+          <Lucide name="user-round" size={30} color="#241F20" />
+        </View>
+      </View>
+      {/* End Cover Container */}
+
+      {/* Profile Info Container */}
+      <View style={styles.profileInfo}>
+        <Text style={styles.name}>User Name</Text>
+        <Text style={styles.secondaryText}>@username</Text>
+        <Text style={styles.bio}>Profile bio</Text>
+        <Text style={styles.secondaryText}>100 followers · 100 following</Text>
+      </View>
+      {/* End Profile Info Container */}
+
+      {/* Saved Boards Container */}
+      <View style={styles.boardsSection}>
+        <View style={styles.boardsHeader}>
+          <Text style={styles.sectionTitle}>Saved boards</Text>
+          <Text style={styles.secondaryText}>{boards.length} boards</Text>
+        </View>
+
+        {boardRows.map((row, index) => (
+          <View key={index} style={styles.boardRow}>
+            {row.map((board) => (
+              <BoardCard key={board.title} board={board} />
+            ))}
+          </View>
+        ))}
+      </View>
+      {/* End Saved Boards Container */}
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    paddingVertical: 15,
+    gap: 15,
+    backgroundColor: '#FFFFFF',
+  },
+  cover: {
+    width: '100%',
+    height: 125,
+    backgroundColor: '#F4F2F0',
+  },
+  avatar: {
+  width: 80,
+  height: 80,
+  marginTop: -40,
+  marginLeft: 20,
+  borderRadius: 40,
+  alignItems: 'center',
+  justifyContent: 'center',
+  backgroundColor: '#F4F2F0',
+},
+  profileInfo: {
+    marginHorizontal: 20,
+    gap: 5,
+  },
+  name: {
+    fontSize: 40,
+    fontWeight: 'bold',
+    color: '#241F20',
+  },
+  secondaryText: {
+    fontSize: 15,
+    color: '#696466',
+  },
+  bio: {
+    fontSize: 15,
+    color: '#241F20',
+  },
+  boardsSection: {
+    flex: 1,
+    marginHorizontal: 20,
+    paddingTop: 15,
+    gap: 15,
+    borderTopWidth: 1,
+    borderTopColor: '#E8E4E1',
+  },
+  boardsHeader: {
+    flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  sectionTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#241F20',
+  },
+  boardRow: {
+    flex: 1,
+    flexDirection: 'row',
+    gap: 15,
+  },
+  boardCard: {
+    flex: 1,
+    gap: 5,
+  },
+  boardCover: {
+    flex: 1,
+    flexDirection: 'row',
+    gap: 5,
+    borderRadius: 10,
+    overflow: 'hidden',
+  },
+  boardImage: {
+    flex: 1,
+    height: '100%',
+    backgroundColor: '#F4F2F0',
+  },
+  boardTitle: {
+    fontSize: 15,
+    fontWeight: 'bold',
+    color: '#241F20',
   },
 });
 
