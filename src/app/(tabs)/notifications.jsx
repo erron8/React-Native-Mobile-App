@@ -11,18 +11,53 @@ const groups = [
   {
     title: 'Today',
     items: [
-      { id: 'id1', title: 'Notification 1', detail: 'Detail 1', hasImage: true },
-      { id: 'id2', title: 'Notification 2', detail: 'Detail 2', hasImage: true },
-      { id: 'id3', title: 'Notification 3', detail: 'Detail 3', hasImage: false },
+      {
+        id: 'id1',
+        title: 'Someone saved Grey Hour',
+        detail: '2h ago',
+        hasImage: true,
+      },
+      {
+        id: 'id2',
+        title: 'New comment on Elegant Vase',
+        detail: 'Love the lighting.',
+        hasImage: true,
+      },
+      {
+        id: 'id3',
+        title: 'You have a new follower',
+        detail: '5h ago',
+        hasImage: false,
+      },
     ],
   },
   {
     title: 'Yesterday',
     items: [
-      { id: 'id4', title: 'Notification 4', detail: 'Detail 4', hasImage: true },
-      { id: 'id5', title: 'Notification 5', detail: 'Detail 5', hasImage: false },
-      { id: 'id6', title: 'Notification 6', detail: 'Detail 6', hasImage: true },
-      { id: 'id7', title: 'Notification 7', detail: 'Detail 7', hasImage: false },
+      {
+        id: 'id4',
+        title: 'Someone saved City From Above',
+        detail: '6:30 PM',
+        hasImage: true,
+      },
+      {
+        id: 'id5',
+        title: 'You have a new follower',
+        detail: '4:15 PM',
+        hasImage: false,
+      },
+      {
+        id: 'id6',
+        title: 'Someone saved Midnight Drive',
+        detail: '2:00 PM',
+        hasImage: true,
+      },
+      {
+        id: 'id7',
+        title: 'You have a new follower',
+        detail: '10:30 AM',
+        hasImage: false,
+      },
     ],
   },
 ];
