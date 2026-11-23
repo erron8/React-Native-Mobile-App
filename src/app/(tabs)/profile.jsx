@@ -1,6 +1,10 @@
 import { Image, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Lucide } from '@react-native-vector-icons/lucide';
+import { DMSans_500Medium } from '@expo-google-fonts/dm-sans/500Medium';
+import { DMSans_700Bold } from '@expo-google-fonts/dm-sans/700Bold';
+import { DMSerifDisplay_400Regular } from '@expo-google-fonts/dm-serif-display/400Regular';
+import { useFonts } from 'expo-font';
 
 const coverImage = { uri: 'https://placehold.co/700x250.png' };
 const boardImage = { uri: 'https://placehold.co/200x200.png' };
@@ -14,7 +18,7 @@ const boards = [
 
 const boardRows = [boards.slice(0, 2), boards.slice(2, 4)];
 
-const BoardCard = ({ board }) => {
+const BoardCard = ({ board, boldFont, mediumFont }) => {
   return (
     <View style={styles.boardCard}>
       {/* Board Cover Container */}
@@ -25,46 +29,70 @@ const BoardCard = ({ board }) => {
       {/* End Board Cover Container */}
 
       {/* Board Info Container */}
-      <Text style={styles.boardTitle}>{board.title}</Text>
-      <Text style={styles.secondaryText}>{board.pinCount} pins</Text>
+      <Text style={[styles.boardTitle, boldFont]}>{board.title}</Text>
+      <Text style={[styles.secondaryText, mediumFont]}>
+        {board.pinCount} pins
+      </Text>
       {/* End Board Info Container */}
     </View>
   );
 };
 
 const Profile = () => {
+  const [fontsLoaded] = useFonts({
+    DMSerifDisplay_400Regular,
+    DMSans_700Bold,
+    DMSans_500Medium,
+  });
+
+  const boldFont = fontsLoaded && styles.boldFont;
+  const mediumFont = fontsLoaded && styles.mediumFont;
+
   return (
     <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
       {/* Cover Container */}
       <View>
         <Image source={coverImage} style={styles.cover} resizeMode="cover" />
 
+        {/* Avatar Container */}
         <View style={styles.avatar}>
           <Lucide name="user-round" size={30} color="#241F20" />
         </View>
+        {/* End Avatar Container */}
       </View>
       {/* End Cover Container */}
 
       {/* Profile Info Container */}
       <View style={styles.profileInfo}>
-        <Text style={styles.name}>User Name</Text>
-        <Text style={styles.secondaryText}>@username</Text>
-        <Text style={styles.bio}>Profile bio</Text>
-        <Text style={styles.secondaryText}>100 followers · 100 following</Text>
+        <Text style={[styles.name, fontsLoaded && styles.titleFont]}>
+          User Name
+        </Text>
+        <Text style={[styles.secondaryText, mediumFont]}>@username</Text>
+        <Text style={[styles.bio, mediumFont]}>Profile bio</Text>
+        <Text style={[styles.secondaryText, mediumFont]}>
+          100 followers · 100 following
+        </Text>
       </View>
       {/* End Profile Info Container */}
 
       {/* Saved Boards Container */}
       <View style={styles.boardsSection}>
         <View style={styles.boardsHeader}>
-          <Text style={styles.sectionTitle}>Saved boards</Text>
-          <Text style={styles.secondaryText}>{boards.length} boards</Text>
+          <Text style={[styles.sectionTitle, boldFont]}>Saved boards</Text>
+          <Text style={[styles.secondaryText, mediumFont]}>
+            {boards.length} boards
+          </Text>
         </View>
 
         {boardRows.map((row, index) => (
           <View key={index} style={styles.boardRow}>
             {row.map((board) => (
-              <BoardCard key={board.title} board={board} />
+              <BoardCard
+                key={board.title}
+                board={board}
+                boldFont={boldFont}
+                mediumFont={mediumFont}
+              />
             ))}
           </View>
         ))}
@@ -87,23 +115,31 @@ const styles = StyleSheet.create({
     backgroundColor: '#F4F2F0',
   },
   avatar: {
-  width: 80,
-  height: 80,
-  marginTop: -40,
-  marginLeft: 20,
-  borderRadius: 40,
-  alignItems: 'center',
-  justifyContent: 'center',
-  backgroundColor: '#F4F2F0',
-},
+    width: 80,
+    height: 80,
+    marginTop: -40,
+    marginLeft: 20,
+    borderRadius: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#F4F2F0',
+  },
   profileInfo: {
     marginHorizontal: 20,
     gap: 5,
   },
   name: {
     fontSize: 40,
-    fontWeight: 'bold',
     color: '#241F20',
+  },
+  titleFont: {
+    fontFamily: 'DMSerifDisplay_400Regular',
+  },
+  boldFont: {
+    fontFamily: 'DMSans_700Bold',
+  },
+  mediumFont: {
+    fontFamily: 'DMSans_500Medium',
   },
   secondaryText: {
     fontSize: 15,
@@ -128,7 +164,6 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: 20,
-    fontWeight: 'bold',
     color: '#241F20',
   },
   boardRow: {
@@ -154,7 +189,6 @@ const styles = StyleSheet.create({
   },
   boardTitle: {
     fontSize: 15,
-    fontWeight: 'bold',
     color: '#241F20',
   },
 });
