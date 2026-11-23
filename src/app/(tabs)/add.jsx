@@ -1,7 +1,17 @@
 import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { DMSans_700Bold } from '@expo-google-fonts/dm-sans/700Bold';
+import { DMSerifDisplay_400Regular } from '@expo-google-fonts/dm-serif-display/400Regular';
+import { useFonts } from 'expo-font';
 
 const Add = () => {
+  const [fontsLoaded] = useFonts({
+    DMSerifDisplay_400Regular,
+    DMSans_700Bold,
+  });
+
+  const boldFont = fontsLoaded && styles.boldFont;
+
   return (
     <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
       <ScrollView
@@ -9,51 +19,60 @@ const Add = () => {
         showsVerticalScrollIndicator={false}
       >
         {/* Title Container */}
-        <Text style={styles.title}>New post</Text>
+        <Text style={[styles.title, fontsLoaded && styles.titleFont]}>
+          New post
+        </Text>
         {/* End Title Container */}
 
         {/* Photo Container */}
         <View style={styles.photoPanel}>
-          <Text style={styles.photoTitle}>Add a photo</Text>
+          <Text style={[styles.photoTitle, boldFont]}>Add a photo</Text>
+
+          <Pressable
+            disabled
+            accessibilityRole="button"
+            style={styles.chooseButton}
+          >
+            <Text style={[styles.chooseButtonText, boldFont]}>Choose photo</Text>
+          </Pressable>
         </View>
         {/* End Photo Container */}
 
         {/* Post Name Container */}
         <View style={styles.field}>
-          <Text style={styles.label}>Post name</Text>
+          <Text style={[styles.label, boldFont]}>Post name</Text>
           <TextInput
             accessibilityLabel="Post name"
-            placeholder="Give your post a name"
+            placeholder="Post name.."
             placeholderTextColor="#686365"
             underlineColorAndroid="transparent"
-            style={styles.input}
+            style={[styles.input, boldFont]}
           />
         </View>
         {/* End Post Name Container */}
 
         {/* Description Container */}
         <View style={styles.field}>
-          <View style={styles.labelRow}>
-            <Text style={styles.label}>Description</Text>
-          </View>
-
+          <Text style={[styles.label, boldFont]}>Description</Text>
           <TextInput
             accessibilityLabel="Description"
-            placeholder="Post description"
+            placeholder="Post description.."
             placeholderTextColor="#686365"
             underlineColorAndroid="transparent"
-            style={[styles.input, styles.descriptionInput]}
+            style={[styles.input, styles.descriptionInput, boldFont]}
             multiline
           />
         </View>
         {/* End Description Container */}
 
         {/* Publish Container */}
-        <View style={styles.field}>
-          <Pressable disabled accessibilityRole="button" style={styles.publishButton}>
-            <Text style={styles.publishButtonText}>Publish post</Text>
-          </Pressable>
-        </View>
+        <Pressable
+          disabled
+          accessibilityRole="button"
+          style={styles.publishButton}
+        >
+          <Text style={[styles.publishButtonText, boldFont]}>Publish post</Text>
+        </Pressable>
         {/* End Publish Container */}
       </ScrollView>
     </SafeAreaView>
@@ -71,40 +90,44 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 40,
-    fontWeight: 'bold',
     color: '#241F20',
+  },
+  titleFont: {
+    fontFamily: 'DMSerifDisplay_400Regular',
+  },
+  boldFont: {
+    fontFamily: 'DMSans_700Bold',
   },
   photoPanel: {
-    minHeight: 210,
-    padding: 15,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderWidth: 1,
-    borderStyle: 'dashed',
-    borderColor: '#D6CBC3',
-    borderRadius: 15,
-    backgroundColor: '#FAF6F2',
-  },
+  minHeight: 150,
+  padding: 15,
+  gap: 15,
+  alignItems: 'center',
+  justifyContent: 'center',
+  borderRadius: 15,
+  backgroundColor: '#FAF6F2',
+},
   photoTitle: {
-    fontSize: 25,
-    fontWeight: 'bold',
+    fontSize: 20,
     color: '#241F20',
   },
-  helperText: {
+  chooseButton: {
+    minHeight: 40,
+    paddingHorizontal: 20,
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#251F20',
+  },
+  chooseButtonText: {
     fontSize: 15,
-    color: '#686365',
-    textAlign: 'center',
+    color: '#FFFFFF',
   },
   field: {
     gap: 5,
   },
-  labelRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
   label: {
     fontSize: 15,
-    fontWeight: 'bold',
     color: '#241F20',
   },
   input: {
@@ -130,7 +153,6 @@ const styles = StyleSheet.create({
   },
   publishButtonText: {
     fontSize: 15,
-    fontWeight: 'bold',
     color: '#756F70',
   },
 });
