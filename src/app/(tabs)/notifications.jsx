@@ -2,10 +2,9 @@ import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Lucide } from '@react-native-vector-icons/lucide';
 import { DMSans_500Medium } from '@expo-google-fonts/dm-sans/500Medium';
+import { DMSans_700Bold } from '@expo-google-fonts/dm-sans/700Bold';
 import { DMSerifDisplay_400Regular } from '@expo-google-fonts/dm-serif-display/400Regular';
 import { useFonts } from 'expo-font';
-
-const placeholder = { uri: 'https://placehold.co/100x100.png' };
 
 const groups = [
   {
@@ -15,19 +14,18 @@ const groups = [
         id: 'id1',
         title: 'Someone saved Grey Hour',
         detail: '2h ago',
-        hasImage: true,
+        image: require('../../../assets/home/home-1.jpg'),
       },
       {
         id: 'id2',
         title: 'New comment on Elegant Vase',
         detail: 'Love the lighting.',
-        hasImage: true,
+        image: require('../../../assets/home/home-3.jpg'),
       },
       {
         id: 'id3',
         title: 'You have a new follower',
         detail: '5h ago',
-        hasImage: false,
       },
     ],
   },
@@ -38,25 +36,23 @@ const groups = [
         id: 'id4',
         title: 'Someone saved City From Above',
         detail: '6:30 PM',
-        hasImage: true,
+        image: require('../../../assets/search/city-from-above.jpg'),
       },
       {
         id: 'id5',
         title: 'You have a new follower',
         detail: '4:15 PM',
-        hasImage: false,
       },
       {
         id: 'id6',
         title: 'Someone saved Midnight Drive',
         detail: '2:00 PM',
-        hasImage: true,
+        image: require('../../../assets/search/midnight-drive.jpg'),
       },
       {
         id: 'id7',
         title: 'You have a new follower',
         detail: '10:30 AM',
-        hasImage: false,
       },
     ],
   },
@@ -65,8 +61,12 @@ const groups = [
 const Notifications = () => {
   const [fontsLoaded] = useFonts({
     DMSerifDisplay_400Regular,
+    DMSans_700Bold,
     DMSans_500Medium,
   });
+
+  const boldFont = fontsLoaded && styles.boldFont;
+  const mediumFont = fontsLoaded && styles.mediumFont;
 
   return (
     <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
@@ -79,7 +79,7 @@ const Notifications = () => {
           <Text style={[styles.title, fontsLoaded && styles.titleFont]}>
             Notifications
           </Text>
-          <Text style={[styles.detail, fontsLoaded && styles.mediumFont]}>
+          <Text style={[styles.detail, mediumFont]}>
             All notifications will show here.
           </Text>
         </View>
@@ -90,7 +90,7 @@ const Notifications = () => {
           <View key={group.title} style={styles.group}>
             {/* Group Header */}
             <View style={styles.groupHeader}>
-              <Text style={styles.groupTitle}>{group.title}</Text>
+              <Text style={[styles.groupTitle, boldFont]}>{group.title}</Text>
               <View style={styles.divider} />
             </View>
             {/* End Group Header */}
@@ -107,17 +107,23 @@ const Notifications = () => {
                 {/* Activity Container */}
                 <View style={styles.rowContent}>
                   <View style={styles.message}>
-                    <Text style={styles.messageTitle}>{item.title}</Text>
-                    <Text style={styles.detail}>{item.detail}</Text>
+                    <Text style={[styles.messageTitle, boldFont]}>
+                      {item.title}
+                    </Text>
+                    <Text style={[styles.detail, mediumFont]}>
+                      {item.detail}
+                    </Text>
                   </View>
 
-                  {item.hasImage && (
+                  {/* Thumbnail Container */}
+                  {item.image && (
                     <Image
-                      source={placeholder}
+                      source={item.image}
                       style={styles.thumbnail}
                       resizeMode="cover"
                     />
                   )}
+                  {/* End Thumbnail Container */}
                 </View>
                 {/* End Activity Container */}
               </View>
@@ -150,6 +156,9 @@ const styles = StyleSheet.create({
   titleFont: {
     fontFamily: 'DMSerifDisplay_400Regular',
   },
+  boldFont: {
+    fontFamily: 'DMSans_700Bold',
+  },
   mediumFont: {
     fontFamily: 'DMSans_500Medium',
   },
@@ -168,7 +177,6 @@ const styles = StyleSheet.create({
   },
   groupTitle: {
     fontSize: 15,
-    fontWeight: 'bold',
     textTransform: 'uppercase',
     color: '#696466',
   },
@@ -207,7 +215,6 @@ const styles = StyleSheet.create({
   messageTitle: {
     fontSize: 15,
     lineHeight: 20,
-    fontWeight: 'bold',
     color: '#241F20',
   },
   thumbnail: {
