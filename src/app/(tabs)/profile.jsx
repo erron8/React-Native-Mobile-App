@@ -6,14 +6,33 @@ import { DMSans_700Bold } from '@expo-google-fonts/dm-sans/700Bold';
 import { DMSerifDisplay_400Regular } from '@expo-google-fonts/dm-serif-display/400Regular';
 import { useFonts } from 'expo-font';
 
-const coverImage = { uri: 'https://placehold.co/700x250.png' };
-const boardImage = { uri: 'https://placehold.co/200x200.png' };
+const coverImage = require('../../../assets/profile/lebron.jpg');
 
 const boards = [
-  { title: 'Board 1', pinCount: 10 },
-  { title: 'Board 2', pinCount: 15 },
-  { title: 'Board 3', pinCount: 20 },
-  { title: 'Board 4', pinCount: 25 },
+  {
+    title: 'Board 1',
+    pinCount: 10,
+    leftImage: require('../../../assets/profile/board1a.jpg'),
+    rightImage: require('../../../assets/profile/board1b.jpg'),
+  },
+  {
+    title: 'Board 2',
+    pinCount: 15,
+    leftImage: require('../../../assets/profile/board2a.jpg'),
+    rightImage: require('../../../assets/profile/board2b.jpg'),
+  },
+  {
+    title: 'Board 3',
+    pinCount: 20,
+    leftImage: require('../../../assets/profile/board3a.jpg'),
+    rightImage: require('../../../assets/profile/board3b.jpg'),
+  },
+  {
+    title: 'Board 4',
+    pinCount: 25,
+    leftImage: require('../../../assets/profile/board4a.jpg'),
+    rightImage: require('../../../assets/profile/board4b.jpg'),
+  },
 ];
 
 const boardRows = [boards.slice(0, 2), boards.slice(2, 4)];
@@ -23,8 +42,18 @@ const BoardCard = ({ board, boldFont, mediumFont }) => {
     <View style={styles.boardCard}>
       {/* Board Cover Container */}
       <View style={styles.boardCover}>
-        <Image source={boardImage} style={styles.boardImage} resizeMode="cover" />
-        <Image source={boardImage} style={styles.boardImage} resizeMode="cover" />
+        <Image
+          source={board.leftImage}
+          style={styles.boardImage}
+          resizeMode="cover"
+          resizeMethod="resize"
+        />
+        <Image
+          source={board.rightImage}
+          style={styles.boardImage}
+          resizeMode="cover"
+          resizeMethod="resize"
+        />
       </View>
       {/* End Board Cover Container */}
 
@@ -52,7 +81,12 @@ const Profile = () => {
     <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
       {/* Cover Container */}
       <View>
-        <Image source={coverImage} style={styles.cover} resizeMode="cover" />
+        <Image
+          source={coverImage}
+          style={styles.cover}
+          resizeMode="cover"
+          resizeMethod="resize"
+        />
 
         {/* Avatar Container */}
         <View style={styles.avatar}>
@@ -65,10 +99,10 @@ const Profile = () => {
       {/* Profile Info Container */}
       <View style={styles.profileInfo}>
         <Text style={[styles.name, fontsLoaded && styles.titleFont]}>
-          User Name
+          Lebron James
         </Text>
-        <Text style={[styles.secondaryText, mediumFont]}>@username</Text>
-        <Text style={[styles.bio, mediumFont]}>Profile bio</Text>
+        <Text style={[styles.secondaryText, mediumFont]}>@kingjames</Text>
+        <Text style={[styles.bio, mediumFont]}>Basketball Player</Text>
         <Text style={[styles.secondaryText, mediumFont]}>
           100 followers · 100 following
         </Text>
@@ -184,6 +218,7 @@ const styles = StyleSheet.create({
   },
   boardImage: {
     flex: 1,
+    width: 0,
     height: '100%',
     backgroundColor: '#F4F2F0',
   },
