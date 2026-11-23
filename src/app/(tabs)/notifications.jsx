@@ -1,6 +1,9 @@
 import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Lucide } from '@react-native-vector-icons/lucide';
+import { DMSans_500Medium } from '@expo-google-fonts/dm-sans/500Medium';
+import { DMSerifDisplay_400Regular } from '@expo-google-fonts/dm-serif-display/400Regular';
+import { useFonts } from 'expo-font';
 
 const placeholder = { uri: 'https://placehold.co/100x100.png' };
 
@@ -25,6 +28,11 @@ const groups = [
 ];
 
 const Notifications = () => {
+  const [fontsLoaded] = useFonts({
+    DMSerifDisplay_400Regular,
+    DMSans_500Medium,
+  });
+
   return (
     <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
       <ScrollView
@@ -33,7 +41,12 @@ const Notifications = () => {
       >
         {/* Header Container */}
         <View style={styles.header}>
-          <Text style={styles.title}>Notifications</Text>
+          <Text style={[styles.title, fontsLoaded && styles.titleFont]}>
+            Notifications
+          </Text>
+          <Text style={[styles.detail, fontsLoaded && styles.mediumFont]}>
+            All notifications will show here.
+          </Text>
         </View>
         {/* End Header Container */}
 
@@ -97,8 +110,13 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 40,
-    fontWeight: 'bold',
     color: '#241F20',
+  },
+  titleFont: {
+    fontFamily: 'DMSerifDisplay_400Regular',
+  },
+  mediumFont: {
+    fontFamily: 'DMSans_500Medium',
   },
   detail: {
     fontSize: 15,
