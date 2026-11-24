@@ -1,5 +1,5 @@
 import { Image, StyleSheet, Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Lucide } from '@react-native-vector-icons/lucide';
 import { DMSans_500Medium } from '@expo-google-fonts/dm-sans/500Medium';
 import { DMSans_700Bold } from '@expo-google-fonts/dm-sans/700Bold';
@@ -68,6 +68,7 @@ const BoardCard = ({ board, boldFont, mediumFont }) => {
 };
 
 const Profile = () => {
+  const { top } = useSafeAreaInsets();
   const [fontsLoaded] = useFonts({
     DMSerifDisplay_400Regular,
     DMSans_700Bold,
@@ -78,12 +79,12 @@ const Profile = () => {
   const mediumFont = fontsLoaded && styles.mediumFont;
 
   return (
-    <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
+    <SafeAreaView style={styles.container} edges={['left', 'right']}>
       {/* Cover Container */}
       <View>
         <Image
           source={coverImage}
-          style={styles.cover}
+          style={[styles.cover, { height: 140 + top }]}
           resizeMode="cover"
           resizeMethod="resize"
         />
@@ -101,11 +102,8 @@ const Profile = () => {
         <Text style={[styles.name, fontsLoaded && styles.titleFont]}>
           Lebron James
         </Text>
-        <Text style={[styles.secondaryText, mediumFont]}>@kingjames</Text>
         <Text style={[styles.bio, mediumFont]}>Basketball Player</Text>
-        <Text style={[styles.secondaryText, mediumFont]}>
-          100 followers · 100 following
-        </Text>
+        <Text style={[styles.secondaryText, mediumFont]}>1.4K followers</Text>
       </View>
       {/* End Profile Info Container */}
 
@@ -139,13 +137,12 @@ const Profile = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingVertical: 15,
+    paddingBottom: 15,
     gap: 15,
     backgroundColor: '#FFFFFF',
   },
   cover: {
     width: '100%',
-    height: 125,
     backgroundColor: '#F4F2F0',
   },
   avatar: {
@@ -160,7 +157,7 @@ const styles = StyleSheet.create({
   },
   profileInfo: {
     marginHorizontal: 20,
-    gap: 5,
+    gap: 10,
   },
   name: {
     fontSize: 40,
