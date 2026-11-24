@@ -6,6 +6,7 @@ import { DMSans_700Bold } from '@expo-google-fonts/dm-sans/700Bold';
 import { DMSerifDisplay_400Regular } from '@expo-google-fonts/dm-serif-display/400Regular';
 import { Lucide } from '@react-native-vector-icons/lucide';
 import { useFonts } from 'expo-font';
+import { useRouter } from 'expo-router';
 
 import pins from '../../data/homePins';
 
@@ -25,6 +26,8 @@ const Home = () => {
       : pins.filter((pin) => pin.category === selectedCategory);
 
   const rows = [visiblePins.slice(0, 2), visiblePins.slice(2, 4)];
+
+  const router = useRouter();
 
   return (
     <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
@@ -81,24 +84,35 @@ const Home = () => {
         {rows.map((row, rowIndex) => (
           <View key={rowIndex} style={styles.feedRow}>
             {row.map((pin) => (
-              <View key={pin.id} style={styles.pinCard}>
-                {/* Photo Container */}
-                <View style={styles.photoContainer}>
-                  <Image
-                    source={pin.image}
-                    style={styles.photo}
-                    resizeMode="cover"
-                  />
-                </View>
-                {/* End Photo Container */}
+  <Pressable
+    key={pin.id}
+    style={styles.pinCard}
+    accessibilityRole="button"
+    accessibilityLabel={pin.title}
+    onPress={() =>
+      router.push({
+        pathname: '/pin/[id]',
+        params: { id: pin.id },
+      })
+    }
+  >
+    {/* Photo Container */}
+    <View style={styles.photoContainer}>
+      <Image
+        source={pin.image}
+        style={styles.photo}
+        resizeMode="cover"
+      />
+    </View>
+    {/* End Photo Container */}
 
-                {/* Title Container */}
-                <Text style={[styles.pinTitle, fontsLoaded && styles.boldFont]}>
-                  {pin.title}
-                </Text>
-                {/* End Title Container */}
-              </View>
-            ))}
+    {/* Title Container */}
+    <Text style={[styles.pinTitle, fontsLoaded && styles.boldFont]}>
+      {pin.title}
+    </Text>
+    {/* End Title Container */}
+  </Pressable>
+))}
           </View>
         ))}
       </View>
