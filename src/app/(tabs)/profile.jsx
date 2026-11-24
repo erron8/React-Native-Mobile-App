@@ -6,7 +6,7 @@ import { DMSans_700Bold } from '@expo-google-fonts/dm-sans/700Bold';
 import { DMSerifDisplay_400Regular } from '@expo-google-fonts/dm-serif-display/400Regular';
 import { useFonts } from 'expo-font';
 
-const coverImage = require('../../../assets/profile/lebron.jpg');
+const coverImage = require('../../../assets/profile/coverImage.jpg');
 
 const boards = [
   {

@@ -2,7 +2,17 @@
 
 Folio adalah prototipe aplikasi mobile bertema koleksi inspirasi visual. Proyek ini dibuat untuk UTS Aplikasi Berbasis Platform dengan React Native, Expo, dan JavaScript.
 
-Tab aplikasi terdiri dari Home, Search, Add, Notifications, dan Profile. Navigasinya memakai Expo Router.
+## Layar dan navigasi
+
+Lima tab utama menggunakan Bottom Tab Navigation dari Expo Router.
+
+- **Home** menampilkan feed dengan filter kategori.
+- **Search** menampilkan topik dan rekomendasi pin.
+- **Add** menampilkan prototipe form unggah foto.
+- **Notifications** menampilkan contoh aktivitas dalam grup Today dan Yesterday.
+- **Profile** menampilkan profil dan empat board.
+
+Ketuk kartu di Home untuk membuka **Pin Detail** lewat Stack Navigation. ID kartu menentukan foto, judul, kategori, dan deskripsi yang ditampilkan. Panah kembali di header membawa ke Home.
 
 ## Cara menjalankan
 
@@ -17,9 +27,9 @@ Pindai QR dengan Expo Go untuk SDK 58, atau tekan `a` untuk membuka aplikasi di 
 
 ## Aset dan referensi
 
-Gambar placeholder dari Placehold.co, ikon dari Lucide, dan font DM Sans serta DM Serif Display. [Placehold.co](https://placehold.co/) · [Lucide](https://lucide.dev/) · [DM Fonts](https://github.com/googlefonts/dm-fonts)
+Folio memakai ikon Lucide serta font DM Sans dan DM Serif Display. Placeholder selama pengembangan menggunakan Placehold.co. [Lucide](https://lucide.dev/) · [DM Fonts](https://github.com/googlefonts/dm-fonts) · [Placehold.co](https://placehold.co/)
 
-Foto di tab Home dan Search menggunakan [Unsplash License](https://unsplash.com/license).
+Foto yang dikreditkan ke fotografer Unsplash menggunakan lisensi standar Unsplash. [Unsplash License](https://unsplash.com/license)
 
 **Home**
 
@@ -36,4 +46,21 @@ Foto di tab Home dan Search menggunakan [Unsplash License](https://unsplash.com/
 - Midnight Drive — [Davyd Markovskyi](https://unsplash.com/photos/person-in-gray-long-sleeve-shirt-driving-car-vbE-_5S7wBw)
 - City From Above — [Lerone Pieters](https://unsplash.com/photos/aerial-view-of-a-brightly-lit-city-at-dusk-VHXs4-7AuJI)
 
-Desain Folio menggabungkan ide dari beberapa unggahan di X tentang UI/UX aplikasi mobile.
+**Profile**
+
+- Cover — [Cedric Letsch](https://unsplash.com/photos/los-angeles-skyline-with-palm-trees-UZVlSjrIJ3o)
+- Board 1 — [Gilley Aguilar](https://unsplash.com/photos/a-basketball-rests-on-a-blue-court-V4m-ZPTz5hs) · [Marius Kriz](https://unsplash.com/photos/basketball-hoop-on-a-court-at-sunset-JBsK9rJEccA)
+- Board 2 — [Matt Aylward](https://unsplash.com/photos/golfer-swinging-club-on-green-course-Nmh-pEBRt2Y) · [Welcome](https://unsplash.com/photos/lawnmower-on-golf-course-green-08Ipbe8GpWw)
+- Board 3 — [Kinshuk Bose](https://unsplash.com/photos/selective-focus-photography-of-lying-short-coated-black-and-tan-dog-pkgznCMKDXo) · [Lukáš Vaňátko](https://unsplash.com/photos/a-close-up-of-a-dog-with-its-mouth-open-kvwkpNwwc74)
+- Board 4 — [Casey Lee](https://unsplash.com/photos/salmon-fillet-with-salsa-and-red-wine-awj7sRviVXo) · [Victoria Shes](https://unsplash.com/photos/grilled-meat-and-vegetable-on-the-table-UC0HZdUitWY)
+
+### Referensi desain
+
+Inspirasi utama Folio adalah aplikasi mobile Pinterest, terutama tampilan feed pin dan pengelompokan pin ke dalam board. [Pinterest di Google Play](https://play.google.com/store/apps/details?id=com.pinterest)
+
+Referensi UI/UX mobile dari X
+
+- [@WasimShips](https://x.com/WasimShips/status/2120851846214684747)
+- [@uiuxbyvicko](https://x.com/uiuxbyvicko/status/2123302753749614908/photo/1)
+- [@uiuxjosh](https://x.com/uiuxjosh/status/2122599398714589601)
+- [@HenrykMatthew](https://x.com/HenrykMatthew/status/1923095249523539977)
