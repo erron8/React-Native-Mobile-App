@@ -1,4 +1,4 @@
-import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Stack, useLocalSearchParams } from 'expo-router';
 import { DMSerifDisplay_400Regular } from '@expo-google-fonts/dm-serif-display/400Regular';
@@ -26,6 +26,8 @@ const PinDetail = () => {
       <Stack.Screen
         options={{
           title: pin?.title ?? 'Pin Detail',
+          headerBackButtonDisplayMode: 'minimal',
+          headerTransparent: false,
           headerTitleStyle: {
             color: '#241F20',
             fontSize: 25,
@@ -36,7 +38,7 @@ const PinDetail = () => {
       {/* End Stack Header */}
 
       {/* Pin Content */}
-      <ScrollView contentContainerStyle={styles.content}>
+      <View style={styles.content}>
         {pin ? (
           <>
             {/* Photo Container */}
@@ -62,7 +64,7 @@ const PinDetail = () => {
         ) : (
           <Text style={[styles.description, mediumFont]}>Pin not found.</Text>
         )}
-      </ScrollView>
+      </View>
       {/* End Pin Content */}
     </SafeAreaView>
   );
@@ -74,10 +76,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
   },
   content: {
+    flex: 1,
     padding: 20,
     gap: 15,
   },
   photoContainer: {
+    flexShrink: 1,
     width: '100%',
     aspectRatio: 5 / 8,
     borderRadius: 10,
